@@ -78,3 +78,13 @@ jobs:
     - name: Build msbuild
       if: ${{ matrix.platform.project != '' }}
       run: msbuild ${{ matrix.platform.project }} /m /p:BuildInParallel=true /p:Configuration=Release ${{ matrix.platform.projectflags }}
+
+    - uses: actions/upload-artifact@v4
+      if: ${{ matrix.platform.name == 'Windows (x64)' || matrix.platform.name == 'UWP (x64)' }}
+      with:
+        name: SDL2 Artifacts ${{ matrix.platform.name }}
+        path: |
+          VisualC/x64/Release/*.dll
+          VisualC/x64/Release/*.lib
+          VisualC-WinRT/x64/Release/SDL-UWP/*.dll
+          VisualC-WinRT/x64/Release/SDL-UWP/*.pri

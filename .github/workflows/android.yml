@@ -24,6 +24,13 @@ jobs:
         if: ${{ matrix.platform.name == 'Android.mk' }}
         run: |
           ./build-scripts/androidbuildlibs.sh
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ matrix.platform.name == 'Android.mk' }}
+        with:
+          name: SDL2 Artifacts (Android)
+          path: build/android/lib
+
       - name: Setup (CMake)
         if: ${{ matrix.platform.name == 'CMake' }}
         run: |

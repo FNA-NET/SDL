@@ -5,3 +5,23 @@
 */
 
 /* vi: set ts=4 sw=4 expandtab: */
+
+
+#define SDL_MAIN_HANDLED
+
+#include "../../SDL_internal.h"
+
+/* Include the SDL main definition header */
+#include "SDL_main.h"
+
+typedef void (*Main)();
+Main CurrentMain;
+
+__attribute__ ((visibility("default"))) void SetMain(Main main) {
+    CurrentMain = main;
+}
+
+__attribute__ ((visibility("default"))) int SDL_main(int argc, char* argv[]) {
+    CurrentMain();
+    return 0;
+}

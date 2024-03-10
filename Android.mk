@@ -123,8 +123,11 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 
 LOCAL_MODULE := SDL2_main
 
-LOCAL_MODULE_FILENAME := libSDL2main
+LOCAL_SRC_FILES := \
+	$(wildcard $(LOCAL_PATH)/src/main/android/*.c)
 
-include $(BUILD_STATIC_LIBRARY)
+LOCAL_MODULE_FILENAME := libmain
+
+include $(BUILD_SHARED_LIBRARY)
 
 $(call import-module,android/cpufeatures)
